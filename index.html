@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N'GUESSAN KOUADION PREVOSTE MAUREL | CV Professionnel — Développeur Web</title>
+  
+  <meta name="description" content="CV Professionnel de N'GUESSAN KOUADION PREVOSTE MAUREL - Développeur Web, Vibe Coding, Créateur de contenu, E-commerce, Montage Vidéo, Infographie et Marketing Digital.">
+  <meta name="author" content="N'GUESSAN KOUADION PREVOSTE MAUREL">
+  
+  <!-- Polices sobres & haute lisibilité -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icônes Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Style épuré CV -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- =======================================================================
+       BANNIÈRE DE CONTRÔLE QUAND UN CV PERSONNALISÉ EST ACTIF
+       ======================================================================= -->
+  <aside id="customCvBanner" class="custom-cv-banner print-hide" aria-label="Mode CV personnalisé">
+    <div id="customCvBannerText">Mode personnalisé actif</div>
+    <div class="banner-actions">
+      <button id="btnEditCustomCv" class="btn btn-secondary btn-sm" type="button">
+        <i data-lucide="edit-3"></i> Modifier
+      </button>
+      <button class="btn btn-gold btn-sm btn-print-pdf" type="button">
+        <i data-lucide="printer"></i> Télécharger PDF
+      </button>
+      <button id="btnResetToOfficial" class="btn btn-ghost btn-sm" type="button">
+        <i data-lucide="rotate-ccw"></i> Rétablir CV de Maurel
+      </button>
+    </div>
+  </aside>
+
+  <!-- =======================================================================
+       BARRE D'ACTION SUPÉRIEURE ÉPURÉE
+       (Sans logo monogramme, sans liens Accueil, Formation, Compétences, Loisir, Expérience)
+       ======================================================================= -->
+  <header class="top-action-bar print-hide">
+    <div class="top-bar-container">
+      <div class="cv-document-badge">
+        <i data-lucide="file-check-2"></i>
+        <span>CURRICULUM VITAE PROFESSIONNEL</span>
+      </div>
+
+      <div class="top-actions-group">
+        <button class="btn btn-gold btn-open-builder" type="button">
+          <i data-lucide="sparkles"></i>
+          <span>Cliquer pour créer un CV pareil</span>
+        </button>
+
+        <button class="btn btn-primary btn-open-quote" type="button">
+          <i data-lucide="mail"></i>
+          <span>Demander un Devis</span>
+        </button>
+
+        <button class="btn btn-secondary btn-print-pdf" type="button" title="Exporter au format PDF">
+          <i data-lucide="download"></i>
+          <span>Télécharger PDF</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       FEUILLE DE CV OFFICIELLE (STRUCTURE RÉELLE, SIMPLE & TRÈS LISIBLE)
+       ======================================================================= -->
+  <main class="cv-wrapper">
+    <article class="cv-sheet">
+      
+      <!-- EN-TÊTE DU CV DANS LE DOCUMENT -->
+      <header class="cv-header">
+        <div class="cv-header-photo-wrap" id="cvPhotoWrap">
+          <img src="assets/profile.jpg" alt="N'GUESSAN KOUADION PREVOSTE MAUREL" class="cv-profile-photo" id="cvPhoto">
+        </div>
+
+        <div class="cv-header-main">
+          <h1 class="cv-name" id="cvName">N'GUESSAN KOUADION PREVOSTE MAUREL</h1>
+          <div class="cv-title" id="cvTitle">DÉVELOPPEUR WEB & CRÉATEUR DIGITAL</div>
+          
+          <div class="cv-contact-row">
+            <div class="cv-contact-item">
+              <i data-lucide="mail"></i>
+              <a href="mailto:serviceslnweb@gmail.com" id="cvEmail">serviceslnweb@gmail.com</a>
+            </div>
+            <div class="cv-contact-item">
+              <i data-lucide="phone"></i>
+              <a href="tel:+2250758951226" id="cvPhone">+225 07 58 95 12 26 / 05 95 35 69 28</a>
+            </div>
+            <div class="cv-contact-item">
+              <i data-lucide="map-pin"></i>
+              <span id="cvLocation">Abidjan, Côte d'Ivoire</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-header-side print-hide">
+          <div class="status-badge">
+            <span class="status-dot"></span>
+            <span id="cvAvailability">Disponible pour projets & CDI</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- CORPS DU CV EN 2 COLONNES SOBRES -->
+      <div class="cv-body">
+        
+        <!-- COLONNE PRINCIPALE (Gauches : Expériences & Formations) -->
+        <div class="cv-main-col">
+          
+          <!-- PROFIL PROFESSIONNEL -->
+          <section class="cv-section">
+            <div class="section-title-wrap">
+              <i data-lucide="user-check"></i>
+              <h2 class="section-title">Profil Professionnel</h2>
+            </div>
+            <p class="cv-summary-text" id="cvBio">
+              Développeur web passionné et créateur polyvalent combinant maîtrise technique, programmation moderne (Vibe coding), vision marketing et sensibilité graphique. Expérimenté dans la conception de plateformes web réactives, la gestion de parcs informatiques, l'e-commerce, le montage vidéo et la création de contenus digitaux percutants.
+            </p>
+          </section>
+
+          <!-- EXPÉRIENCES PROFESSIONNELLES -->
+          <section class="cv-section">
+            <div class="section-title-wrap">
+              <i data-lucide="briefcase"></i>
+              <h2 class="section-title">Expériences Professionnelles</h2>
+            </div>
+            <div class="exp-list" id="cvExpList">
+              <!-- Rempli dynamiquement par app.js -->
+            </div>
+          </section>
+
+          <!-- PARCOURS ACADÉMIQUE / FORMATION -->
+          <section class="cv-section">
+            <div class="section-title-wrap">
+              <i data-lucide="graduation-cap"></i>
+              <h2 class="section-title">Parcours Académique & Diplômes</h2>
+            </div>
+            <div class="edu-list" id="cvEduList">
+              <!-- Rempli dynamiquement par app.js -->
+            </div>
+          </section>
+
+        </div>
+
+        <!-- COLONNE LATÉRALE (Droites : Compétences, Loisirs, Réseaux) -->
+        <aside class="cv-side-col">
+          
+          <!-- COMPÉTENCES TECHNIQUES & DIGITALES -->
+          <section class="cv-section">
+            <div class="section-title-wrap">
+              <i data-lucide="award"></i>
+              <h2 class="section-title">Compétences</h2>
+            </div>
+            <div class="skills-tags-list" id="cvSkillsList">
+              <!-- Rempli dynamiquement par app.js -->
+            </div>
+          </section>
+
+          <!-- LOISIRS & CENTRES D'INTÉRÊT -->
+          <section class="cv-section">
+            <div class="section-title-wrap">
+              <i data-lucide="heart"></i>
+              <h2 class="section-title">Temps Libres</h2>
+            </div>
+            <div class="hobbies-clean-list" id="cvHobbiesList">
+              <!-- Rempli dynamiquement par app.js -->
+            </div>
+          </section>
+
+          <!-- RÉSEAUX SOCIAUX & CONTACT -->
+          <section class="cv-section">
+            <div class="section-title-wrap">
+              <i data-lucide="share-2"></i>
+              <h2 class="section-title">Réseaux Sociaux</h2>
+            </div>
+            <div class="socials-clean-list" id="cvSocialsList">
+              <!-- Rempli dynamiquement par app.js -->
+            </div>
+          </section>
+
+        </aside>
+
+      </div>
+
+    </article>
+
+    <!-- ACTIONS SOUS LE DOCUMENT CV -->
+    <div class="cv-footer-actions print-hide">
+      <div class="footer-copy-text">
+        &copy; <span id="currentYear">2026</span> N'GUESSAN KOUADION PREVOSTE MAUREL. CV professionnel certifié.
+      </div>
+      <div style="display:flex; gap:0.6rem;">
+        <button class="btn btn-primary btn-open-quote" type="button">
+          <i data-lucide="mail"></i> Demander un Devis par Mail
+        </button>
+        <button class="btn btn-gold btn-open-builder" type="button">
+          <i data-lucide="sparkles"></i> Créer un CV pareil
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- =======================================================================
+       MODALE 1 : DEMANDE DE DEVIS
+       Envoi direct vers serviceslnweb@gmail.com
+       ======================================================================= -->
+  <div class="modal-overlay" id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 id="quoteModalTitle">Demander un Devis à Maurel</h3>
+          <p>Le devis sera directement envoyé à <strong>serviceslnweb@gmail.com</strong>.</p>
+        </div>
+        <button class="modal-close-btn" id="closeQuoteBtn" type="button" aria-label="Fermer">&times;</button>
+      </div>
+
+      <form id="quoteForm">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="quoteClientName">Votre Nom & Prénom <span class="req">*</span></label>
+              <input type="text" id="quoteClientName" class="form-input" placeholder="Ex: Jean Dupont" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="quoteClientEmail">Votre Email <span class="req">*</span></label>
+              <input type="email" id="quoteClientEmail" class="form-input" placeholder="Ex: jean.dupont@gmail.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="quoteClientPhone">Téléphone / WhatsApp</label>
+              <input type="tel" id="quoteClientPhone" class="form-input" placeholder="Ex: +225 07 12 34 56 78">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="quoteDeadline">Délai souhaité</label>
+              <select id="quoteDeadline" class="form-select">
+                <option value="Urgent (moins d'1 semaine)">Urgent (moins d'1 semaine)</option>
+                <option value="1 à 2 semaines" selected>1 à 2 semaines</option>
+                <option value="1 mois">1 mois</option>
+                <option value="Flexible">Flexible</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Type de Projet <span class="req">*</span></label>
+            <div class="service-chips-grid">
+              <label class="service-chip-option">
+                <input type="radio" name="quoteService" value="Création de Site Web" checked>
+                <div class="service-chip-card">
+                  <span class="chip-title">🌐 Site Web</span>
+                  <span class="chip-desc">Vitrine, portfolio, landing page</span>
+                </div>
+              </label>
+
+              <label class="service-chip-option">
+                <input type="radio" name="quoteService" value="Boutique E-commerce">
+                <div class="service-chip-card">
+                  <span class="chip-title">🛍️ E-commerce</span>
+                  <span class="chip-desc">Boutique en ligne & tunnels</span>
+                </div>
+              </label>
+
+              <label class="service-chip-option">
+                <input type="radio" name="quoteService" value="Montage Vidéo">
+                <div class="service-chip-card">
+                  <span class="chip-title">🎬 Montage Vidéo</span>
+                  <span class="chip-desc">Reels, TikTok, spots promo</span>
+                </div>
+              </label>
+
+              <label class="service-chip-option">
+                <input type="radio" name="quoteService" value="Infographie & Design">
+                <div class="service-chip-card">
+                  <span class="chip-title">🎨 Infographie</span>
+                  <span class="chip-desc">Logos, affiches, flyers</span>
+                </div>
+              </label>
+
+              <label class="service-chip-option">
+                <input type="radio" name="quoteService" value="Marketing Digital">
+                <div class="service-chip-card">
+                  <span class="chip-title">📈 Marketing Digital</span>
+                  <span class="chip-desc">Community Management</span>
+                </div>
+              </label>
+
+              <label class="service-chip-option">
+                <input type="radio" name="quoteService" value="Autre / Vibe Coding">
+                <div class="service-chip-card">
+                  <span class="chip-title">⚡ Sur-mesure</span>
+                  <span class="chip-desc">Développement spécifique</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="quoteBudget">Budget estimé</label>
+            <select id="quoteBudget" class="form-select">
+              <option value="50.000 — 150.000 FCFA">50.000 — 150.000 FCFA</option>
+              <option value="150.000 — 300.000 FCFA" selected>150.000 — 300.000 FCFA</option>
+              <option value="300.000 — 600.000 FCFA">300.000 — 600.000 FCFA</option>
+              <option value="Plus de 600.000 FCFA">Plus de 600.000 FCFA</option>
+              <option value="À discuter">À discuter</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="quoteDetails">Description de votre besoin <span class="req">*</span></label>
+            <textarea id="quoteDetails" class="form-textarea" placeholder="Expliquez en quelques lignes votre projet..." required></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="btnCopyQuote">Copier</button>
+          <button type="button" class="btn btn-secondary" id="btnSendQuoteWhatsapp">
+            <i data-lucide="message-circle"></i> WhatsApp
+          </button>
+          <button type="button" class="btn btn-primary" id="btnSendQuoteEmail">
+            <i data-lucide="mail"></i> Envoyer le Devis à Maurel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       MODALE 2 : GÉNÉRATEUR DE CV (« CRÉER UN CV PAREIL »)
+       ======================================================================= -->
+  <div class="modal-overlay" id="cvBuilderModal" role="dialog" aria-modal="true" aria-labelledby="cvBuilderModalTitle">
+    <div class="modal-box modal-box-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 id="cvBuilderModalTitle">Créer un CV Pareil avec vos informations</h3>
+          <p>Renseignez vos données ci-dessous pour générer instantanément votre CV dans ce même format.</p>
+        </div>
+        <button class="modal-close-btn" id="closeBuilderBtn" type="button" aria-label="Fermer">&times;</button>
+      </div>
+
+      <div style="padding: 0.85rem 1.5rem 0; background: #F8FAFC;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; flex-wrap:wrap; gap:0.5rem;">
+          <div class="builder-tabs" role="tablist">
+            <button type="button" class="builder-tab-btn active" data-target="tabIdentite">
+              <i data-lucide="user"></i> Identité
+            </button>
+            <button type="button" class="builder-tab-btn" data-target="tabCompetences">
+              <i data-lucide="award"></i> Compétences
+            </button>
+            <button type="button" class="builder-tab-btn" data-target="tabExperiences">
+              <i data-lucide="briefcase"></i> Expériences
+            </button>
+            <button type="button" class="builder-tab-btn" data-target="tabFormations">
+              <i data-lucide="graduation-cap"></i> Formations
+            </button>
+            <button type="button" class="builder-tab-btn" data-target="tabLoisirs">
+              <i data-lucide="heart"></i> Loisirs
+            </button>
+          </div>
+
+          <button type="button" class="btn btn-secondary btn-sm" id="btnFillPreset">
+            <i data-lucide="sparkles"></i> Pré-remplir exemple
+          </button>
+        </div>
+      </div>
+
+      <form id="cvBuilderForm">
+        <div class="modal-body">
+          <!-- ONGLET 1 : IDENTITÉ -->
+          <div class="builder-tab-pane active" id="tabIdentite">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="bldFullName">Nom complet & Prénoms <span class="req">*</span></label>
+                <input type="text" id="bldFullName" class="form-input" placeholder="Ex: KOUASSI YAO AIME" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="bldTitle">Métier / Titre <span class="req">*</span></label>
+                <input type="text" id="bldTitle" class="form-input" placeholder="Ex: Développeur Web & Mobile" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="bldEmail">Email <span class="req">*</span></label>
+                <input type="email" id="bldEmail" class="form-input" placeholder="Ex: yao@example.com" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="bldPhone">Téléphone</label>
+                <input type="tel" id="bldPhone" class="form-input" placeholder="Ex: +225 07 11 22 33 44">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="bldLocation">Ville, Pays</label>
+              <input type="text" id="bldLocation" class="form-input" placeholder="Ex: Abidjan, Côte d'Ivoire">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="bldBio">Profil / Résumé professionnel</label>
+              <textarea id="bldBio" class="form-textarea" placeholder="Présentez brièvement vos atouts et votre expérience..."></textarea>
+            </div>
+          </div>
+
+          <!-- ONGLET 2 : COMPÉTENCES -->
+          <div class="builder-tab-pane" id="tabCompetences">
+            <div class="form-group">
+              <label class="form-label" for="bldSkills">Vos Compétences (séparées par des virgules) <span class="req">*</span></label>
+              <input type="text" id="bldSkills" class="form-input" placeholder="Ex: Développeur Web, Vibe coding, React, WordPress, E-commerce, Montage Vidéo">
+            </div>
+          </div>
+
+          <!-- ONGLET 3 : EXPÉRIENCES -->
+          <div class="builder-tab-pane" id="tabExperiences">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="form-label">Vos Postes & Expériences</span>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnAddExpItem">
+                <i data-lucide="plus"></i> Ajouter une expérience
+              </button>
+            </div>
+            <div id="builderExpList" style="display:flex; flex-direction:column; gap:0.75rem;"></div>
+          </div>
+
+          <!-- ONGLET 4 : FORMATIONS -->
+          <div class="builder-tab-pane" id="tabFormations">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="form-label">Vos Diplômes & Formations</span>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnAddEduItem">
+                <i data-lucide="plus"></i> Ajouter une formation
+              </button>
+            </div>
+            <div id="builderEduList" style="display:flex; flex-direction:column; gap:0.75rem;"></div>
+          </div>
+
+          <!-- ONGLET 5 : LOISIRS -->
+          <div class="builder-tab-pane" id="tabLoisirs">
+            <div class="form-group">
+              <label class="form-label" for="bldHobbies">Centres d'intérêt (séparés par des virgules)</label>
+              <input type="text" id="bldHobbies" class="form-input" placeholder="Ex: Lecture, Musique, Football, Voyages">
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" onclick="document.getElementById('closeBuilderBtn').click()">
+            Annuler
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i data-lucide="check"></i> Valider et Générer mon CV !
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
