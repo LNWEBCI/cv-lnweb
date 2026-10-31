@@ -1,14 +1,14 @@
 /**
  * Données par défaut du CV professionnel
- * N'GUESSAN KOUADION PREVOSTE MAUREL
+ * N'GUESSAN KOUADIO PREVOSTE MAUREL
  */
 
 const defaultProfile = {
-  fullName: "N'GUESSAN KOUADION PREVOSTE MAUREL",
+  fullName: "N'GUESSAN KOUADIO PREVOSTE MAUREL",
   title: "Développeur Web & Créateur Digital",
   subtitle: "Spécialiste Vibe Coding, E-commerce, Montage Vidéo, Infographie & Marketing Digital",
   photo: "assets/profile.jpg",
-  email: "serviceslnweb@gmail.com",
+  email: "prevostemaurel@gmail.com",
   phone: "+225 07 58 95 12 26 / 05 95 35 69 28",
   whatsapp: "2250758951226",
   location: "Abidjan, Côte d'Ivoire",
@@ -66,24 +66,42 @@ const defaultProfile = {
     "Montage Vidéo",
     "Infographie",
     "Marketing Digital",
-    "Community Manager"
+    "Community Manager",
+    "Certifications Google reconnues"
   ],
 
   // Parcours professionnel
   experience: [
     {
+      period: "2025 — Présent",
+      duration: "En poste",
+      role: "Fondateur & Directeur",
+      company: "Lnweb Digital",
+      location: "Abidjan, Côte d'Ivoire",
+      type: "Entreprise",
+      description: "Création et direction d'une agence de services numériques.",
+      tasks: [
+        "Missions freelance en partenariat avec d'autres entreprises.",
+        "Gestion des réseaux sociaux d'entreprises et d'e-commerçants.",
+        "Assistance informatique et support technique aux entreprises.",
+        "Formation des entreprises et particuliers aux nouveaux outils technologiques.",
+        "Conception graphique : affiches, flyers et logos.",
+        "Création de sites internet et d'applications sur mesure."
+      ]
+    },
+    {
       period: "Janvier 2023 — Février 2025",
       duration: "2 ans 2 mois",
-      role: "Informaticien Général, Développeur & Community Manager",
+      role: "Informaticien, Développeur & Community Manager",
       company: "ComEvents",
       location: "Côte d'Ivoire",
       type: "Poste clé",
-      description: "Gestion intégrale de l'infrastructure informatique, développement d'outils web sur-mesure et pilotage stratégique de la communication digitale.",
+      description: "Gestion informatique, développement web et communication digitale.",
       tasks: [
-        "Maintenance et administration du parc informatique et assistance technique aux équipes.",
-        "Conception, mise en ligne et optimisation de sites web événementiels et institutionnels.",
-        "Élaboration et déploiement de la stratégie de Community Management (création de contenus visuels, modération, engagement d'audience).",
-        "Couverture médiatique digitale et promotion multi-plateforme des événements."
+        "Maintenance du parc informatique et assistance aux équipes.",
+        "Création et mise à jour des sites web de l'entreprise.",
+        "Gestion des réseaux sociaux et création de contenus visuels.",
+        "Promotion digitale des événements."
       ]
     },
     {
@@ -93,25 +111,25 @@ const defaultProfile = {
       company: "Kaspy Corporation",
       location: "Côte d'Ivoire",
       type: "Mission développement",
-      description: "Participation active au développement de solutions numériques innovantes et d'applications web d'entreprise.",
+      description: "Développement d'applications web pour l'entreprise et ses clients.",
       tasks: [
-        "Intégration d'interfaces web réactives, élégantes et orientées expérience utilisateur.",
-        "Développement et interconnexion de modules fonctionnels pour les projets clients.",
-        "Optimisation des performances web, du temps de chargement et de la compatibilité multi-navigateurs."
+        "Intégration d'interfaces web responsives.",
+        "Développement de modules fonctionnels.",
+        "Optimisation des performances et de la compatibilité."
       ]
     },
     {
       period: "2022",
       duration: "Stage",
-      role: "Stagiaire en Informatique & Support Technique",
+      role: "Stagiaire Informatique & Support Technique",
       company: "Institut Pasteur de Côte d'Ivoire",
       location: "Abidjan, Côte d'Ivoire",
       type: "Stage professionnel",
-      description: "Immersion professionnelle au sein d'une institution d'excellence dans le domaine scientifique et médical.",
+      description: "Support informatique au sein d'une institution scientifique.",
       tasks: [
-        "Assistance aux utilisateurs, diagnostic et résolution des incidents matériels et logiciels.",
-        "Maintenance préventive et curative des postes de travail et équipements réseau.",
-        "Sensibilisation aux bonnes pratiques de sécurité informatique et de gestion des données."
+        "Assistance utilisateurs et résolution d'incidents.",
+        "Maintenance des postes de travail et du réseau.",
+        "Sensibilisation à la sécurité informatique."
       ]
     }
   ],

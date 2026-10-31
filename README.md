@@ -1,5 +1,5 @@
 # Plateforme Web CV Professionnel & Générateur de CV
-## N'GUESSAN KOUADION PREVOSTE MAUREL — Développeur Web & Créateur Digital
+## N'GUESSAN KOUADIO PREVOSTE MAUREL — Développeur Web & Créateur Digital
 
 Bienvenue sur le projet de CV professionnel sous forme de site web moderne, interactif, responsive et haut de gamme.
 
@@ -11,7 +11,7 @@ Bienvenue sur le projet de CV professionnel sous forme de site web moderne, inte
    - Charte graphique combinant nuances d'or métallique (`#FCD34D`, `#F59E0B`) et orange vibrant (`#FB923C`, `#EA580C`) sur un fond sombre technologique ultra premium.
    - Halos lumineux d'ambiance et animations fluides (micro-interactions, badges lumineux, cartes en verre dépoli glassmorphism).
 
-2. **Profil Complet de N'GUESSAN KOUADION PREVOSTE MAUREL** :
+2. **Profil Complet de N'GUESSAN KOUADIO PREVOSTE MAUREL** :
    - **Titre & Rôles** : Développeur Web, Vibe Coding, Créateur de contenu, E-commerce, Montage Vidéo, Infographe, Marketing Digital, Community Manager.
    - **Parcours Académique** :
      - BEPC 2014-2015 — Lycée Moderne BAD de Soubré

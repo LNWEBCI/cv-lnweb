@@ -9,24 +9,31 @@
   --bg-page: #F1F5F9;
   --bg-cv: #FFFFFF;
   --bg-subtle: #F8FAFC;
-  --bg-tag: #FEF3C7;
-  
+
+  /* Couleurs de base du thème (modifiables par le créateur de CV via app.js) */
+  --accent-gold: #D97706;
+  --accent-orange: #EA580C;
+
+  /* Nuances dérivées automatiquement des deux couleurs de base */
+  --bg-tag: color-mix(in srgb, var(--accent-gold) 18%, #FFFFFF);
+  --gold-bright: color-mix(in srgb, var(--accent-gold) 82%, #FFFFFF);
+  --gold-soft: color-mix(in srgb, var(--accent-gold) 55%, #FFFFFF);
+  --gold-faint: color-mix(in srgb, var(--accent-gold) 6%, #FFFFFF);
+  --gold-deep: color-mix(in srgb, var(--accent-gold) 50%, #000000);
+  --accent-gold-light: color-mix(in srgb, var(--accent-gold) 40%, #FFFFFF);
+  --accent-orange-light: color-mix(in srgb, var(--accent-orange) 16%, #FFFFFF);
+  --orange-faint: color-mix(in srgb, var(--accent-orange) 7%, #FFFFFF);
+
   --border-color: #E2E8F0;
-  --border-gold: #D97706;
-  --border-orange: #EA580C;
+  --border-gold: var(--accent-gold);
+  --border-orange: var(--accent-orange);
 
   /* Couleurs de texte haute lisibilité */
   --text-dark: #0F172A;
   --text-body: #334155;
   --text-muted: #64748B;
-  --text-gold: #B45309;
-  --text-orange: #C2410C;
-
-  /* Accents mesurés (sans néon agressif) */
-  --accent-gold: #D97706;
-  --accent-gold-light: #FDE68A;
-  --accent-orange: #EA580C;
-  --accent-orange-light: #FFEDD5;
+  --text-gold: color-mix(in srgb, var(--accent-gold) 80%, #000000);
+  --text-orange: color-mix(in srgb, var(--accent-orange) 85%, #000000);
 
   /* Typographie */
   --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -96,7 +103,7 @@ body {
   background: var(--bg-tag);
   padding: 0.3rem 0.75rem;
   border-radius: var(--radius-sm);
-  border: 1px solid #FCD34D;
+  border: 1px solid var(--gold-soft);
 }
 
 .top-actions-group {
@@ -109,9 +116,9 @@ body {
 /* Bannière de bascule de profil personnalisé */
 .custom-cv-banner {
   display: none;
-  background: #FFFBEB;
+  background: var(--gold-faint);
   border-bottom: 2px solid var(--accent-gold);
-  color: #78350F;
+  color: var(--gold-deep);
   padding: 0.65rem 1.25rem;
   font-size: 0.88rem;
   font-weight: 600;
@@ -156,19 +163,19 @@ body {
 }
 
 .btn-primary:hover {
-  background: #C2410C;
-  border-color: #C2410C;
+  background: var(--text-orange);
+  border-color: var(--text-orange);
 }
 
 .btn-gold {
-  background: #F59E0B;
+  background: var(--gold-bright);
   color: #0F172A;
-  border-color: #D97706;
+  border-color: var(--accent-gold);
   font-weight: 700;
 }
 
 .btn-gold:hover {
-  background: #D97706;
+  background: var(--accent-gold);
   color: #FFFFFF;
 }
 
@@ -234,7 +241,7 @@ body {
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid var(--accent-gold);
-  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.2);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent-gold) 20%, transparent);
   flex-shrink: 0;
   background: #F8FAFC;
 }
@@ -433,7 +440,7 @@ body {
   background: var(--bg-tag);
   padding: 0.15rem 0.55rem;
   border-radius: var(--radius-sm);
-  border: 1px solid #FCD34D;
+  border: 1px solid var(--gold-soft);
   white-space: nowrap;
 }
 
@@ -551,9 +558,9 @@ body {
 }
 
 .skill-tag.featured {
-  background: #FEF3C7;
-  border-color: #F59E0B;
-  color: #78350F;
+  background: var(--bg-tag);
+  border-color: var(--gold-bright);
+  color: var(--gold-deep);
 }
 
 .skill-tag-dot {
@@ -630,10 +637,10 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: #FFF7ED;
+  background: var(--orange-faint);
   color: var(--accent-orange);
   flex-shrink: 0;
-  border: 1px solid #FFEDD5;
+  border: 1px solid var(--accent-orange-light);
   transition: all 0.2s ease;
 }
 
@@ -650,7 +657,7 @@ body {
 
 .social-clean-link:hover {
   border-color: var(--accent-orange);
-  background: #FFFBEB;
+  background: var(--gold-faint);
   transform: translateX(3px);
 }
 
@@ -682,6 +689,27 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+/* Sur un CV personnalisé : pas de « Créer un CV pareil », mais un message de soutien */
+.is-custom-cv .btn-open-builder {
+  display: none;
+}
+
+.support-note {
+  display: none;
+  max-width: 960px;
+  margin: 1.25rem auto 0;
+  padding: 0 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.is-custom-cv .support-note {
+  display: block;
 }
 
 .footer-copy-text {
@@ -818,7 +846,7 @@ body {
 .form-textarea:focus {
   outline: none;
   border-color: var(--accent-orange);
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-orange) 15%, transparent);
 }
 
 .form-textarea {
@@ -862,7 +890,7 @@ body {
 
 .service-chip-option input:checked + .service-chip-card {
   border-color: var(--accent-orange);
-  background: #FFF7ED;
+  background: var(--orange-faint);
 }
 
 .chip-title {
@@ -901,9 +929,9 @@ body {
 }
 
 .builder-tab-btn.active {
-  background: #FFFBEB;
-  color: #B45309;
-  border-color: #FCD34D;
+  background: var(--gold-faint);
+  color: var(--text-gold);
+  border-color: var(--gold-soft);
 }
 
 .builder-tab-pane {
@@ -942,6 +970,179 @@ body {
   justify-content: center;
   cursor: pointer;
   font-size: 0.8rem;
+}
+
+/* Import de photo (créateur de CV) */
+.photo-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.photo-upload-preview {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 2px dashed #CBD5E1;
+  background: #F8FAFC;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.photo-upload-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 25%;
+}
+
+.photo-upload-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.photo-upload-actions [hidden] {
+  display: none;
+}
+
+.photo-upload-hint {
+  width: 100%;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Choix des couleurs (créateur de CV) */
+.theme-presets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.5rem;
+}
+
+.theme-preset-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.65rem;
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.theme-preset-btn:hover {
+  transform: translateY(-1px);
+  border-color: #CBD5E1;
+}
+
+.theme-preset-btn.active {
+  border-color: var(--text-dark);
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.12);
+}
+
+.theme-preset-swatch {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 30px;
+  height: 18px;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.theme-preset-swatch span {
+  flex: 1;
+}
+
+.color-field {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.color-field input[type="color"] {
+  width: 46px;
+  height: 36px;
+  padding: 2px;
+  border: 1px solid #CBD5E1;
+  border-radius: var(--radius-sm);
+  background: #FFFFFF;
+  cursor: pointer;
+}
+
+.color-field-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.theme-preview {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.theme-preview-bar {
+  height: 5px;
+  background: var(--p);
+}
+
+.theme-preview-body {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1rem;
+}
+
+.theme-preview-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 3px solid var(--p);
+  background: #F1F5F9;
+  flex-shrink: 0;
+}
+
+.theme-preview-name {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.theme-preview-title {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--s);
+  border-bottom: 2px solid var(--p);
+  display: inline-block;
+  margin-bottom: 0.4rem;
+}
+
+.theme-preview-tags {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.theme-preview-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--p) 18%, #FFFFFF);
+  border: 1px solid color-mix(in srgb, var(--p) 55%, #FFFFFF);
+  color: color-mix(in srgb, var(--p) 50%, #000000);
 }
 
 /* Toast alert feedback */
@@ -1012,6 +1213,465 @@ body {
 }
 
 /* ==========================================================================
+   ANIMATIONS & EFFETS DE DESIGN PROFESSIONNEL
+   ========================================================================== */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Fond de page : trame de points discrète + halos dorés */
+body {
+  background-image:
+    radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--accent-gold) 10%, transparent), transparent 38%),
+    radial-gradient(circle at 88% 92%, color-mix(in srgb, var(--accent-orange) 8%, transparent), transparent 40%),
+    radial-gradient(rgba(15, 23, 42, 0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 22px 22px;
+  background-attachment: fixed;
+}
+
+/* Barre de progression de lecture */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--gold-bright), var(--accent-orange));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 200;
+  pointer-events: none;
+}
+
+/* Barre du haut : verre dépoli + ombre au défilement */
+.top-action-bar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: box-shadow 0.3s ease;
+}
+
+.top-action-bar.is-scrolled {
+  box-shadow: 0 6px 20px -8px rgba(15, 23, 42, 0.18);
+}
+
+/* Entrée de la feuille de CV */
+.cv-sheet {
+  animation: sheetIn 0.8s var(--ease-out) both;
+  transition: box-shadow 0.4s ease;
+}
+
+.cv-sheet:hover {
+  box-shadow: 0 18px 50px -12px rgba(15, 23, 42, 0.18), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes sheetIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.99); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* En-tête : apparition échelonnée + halo qui suit la souris */
+.cv-header {
+  position: relative;
+  background:
+    radial-gradient(420px circle at var(--mx, 85%) var(--my, 0%), color-mix(in srgb, var(--accent-gold) 10%, transparent), transparent 60%),
+    #FFFFFF;
+}
+
+.cv-header-photo-wrap,
+.cv-name,
+.cv-title,
+.cv-contact-item,
+.status-badge {
+  animation: fadeUp 0.7s var(--ease-out) both;
+}
+
+.cv-header-photo-wrap { animation-name: photoIn; animation-delay: 0.15s; }
+.cv-name { animation-delay: 0.25s; }
+.cv-title { animation-delay: 0.35s; }
+.cv-contact-item:nth-child(1) { animation-delay: 0.45s; }
+.cv-contact-item:nth-child(2) { animation-delay: 0.52s; }
+.cv-contact-item:nth-child(3) { animation-delay: 0.59s; }
+.status-badge { animation-delay: 0.65s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes photoIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Photo : anneau doré en rotation + zoom au survol */
+.cv-header-photo-wrap {
+  position: relative;
+  border: none;
+  padding: 3px;
+  isolation: isolate;
+}
+
+.cv-header-photo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: conic-gradient(var(--gold-bright), var(--accent-orange), var(--accent-gold-light), var(--accent-gold), var(--gold-bright));
+  animation: spin 6s linear infinite;
+  z-index: -1;
+}
+
+.cv-profile-photo {
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.cv-header-photo-wrap:hover .cv-profile-photo {
+  transform: scale(1.06);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Nom : reflet doré qui balaie le texte à l'ouverture */
+.cv-name {
+  background: linear-gradient(100deg, var(--text-dark) 0%, var(--text-dark) 40%, var(--accent-gold) 50%, var(--text-dark) 60%, var(--text-dark) 100%);
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeUp 0.7s var(--ease-out) 0.25s both, sheen 2.2s ease 1s both;
+}
+
+@keyframes sheen {
+  from { background-position: 100% 0; }
+  to   { background-position: 0 0; }
+}
+
+/* Titre : soulignement dégradé qui se dessine */
+.cv-title {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 0.2rem;
+}
+
+.cv-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent-orange), transparent);
+  transform-origin: 0 50%;
+  animation: drawLine 0.9s var(--ease-out) 0.8s both;
+}
+
+@keyframes drawLine {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.cv-contact-item i,
+.cv-contact-item svg {
+  transition: transform 0.25s ease;
+}
+
+.cv-contact-item:hover i,
+.cv-contact-item:hover svg {
+  transform: scale(1.2) rotate(-8deg);
+}
+
+/* Pastille « Disponible » : pulsation */
+.status-dot {
+  position: relative;
+}
+
+.status-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #16A34A;
+  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%, 100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Titres de section : ligne dorée qui se trace à l'apparition */
+.section-title-wrap {
+  position: relative;
+  border-bottom-color: var(--border-color);
+}
+
+.section-title-wrap::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+  transform-origin: 0 50%;
+  transition: transform 0.9s var(--ease-out) 0.15s;
+}
+
+.section-title-wrap i,
+.section-title-wrap svg {
+  transition: transform 0.6s var(--ease-out) 0.2s;
+}
+
+.cv-section.reveal:not(.is-visible) .section-title-wrap::after {
+  transform: scaleX(0);
+}
+
+.cv-section.reveal:not(.is-visible) .section-title-wrap i,
+.cv-section.reveal:not(.is-visible) .section-title-wrap svg {
+  transform: scale(0) rotate(-90deg);
+}
+
+/* Expériences : frise chronologique + cartes au survol */
+.exp-list {
+  position: relative;
+  padding-left: 1.4rem;
+  gap: 0.6rem;
+}
+
+.exp-list::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1.2rem;
+  bottom: 1.2rem;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-gold), var(--accent-orange) 70%, color-mix(in srgb, var(--accent-orange) 10%, transparent));
+  transform-origin: 50% 0;
+  transition: transform 1.4s var(--ease-out) 0.3s;
+}
+
+.cv-section.reveal:not(.is-visible) .exp-list::before {
+  transform: scaleY(0);
+}
+
+.exp-item {
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.exp-item::before {
+  content: '';
+  position: absolute;
+  left: -1.4rem;
+  top: 1.05rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 3px solid var(--accent-gold);
+  box-shadow: 0 0 0 3px #FFFFFF;
+  transition: transform 0.3s var(--ease-out), background 0.3s ease, border-color 0.3s ease;
+}
+
+.exp-item:hover {
+  background: var(--gold-faint);
+  border-color: var(--accent-gold-light);
+  box-shadow: 0 8px 22px -12px color-mix(in srgb, var(--accent-gold) 35%, transparent);
+}
+
+.exp-item:hover::before {
+  transform: scale(1.3);
+  background: var(--accent-orange);
+  border-color: var(--accent-orange);
+}
+
+.exp-item:first-child::before {
+  background: var(--accent-gold);
+}
+
+.exp-period {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.exp-item:hover .exp-period {
+  background: var(--accent-gold);
+  color: #FFFFFF;
+}
+
+.exp-task-item::before {
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+
+.exp-task-item:hover::before {
+  transform: rotate(45deg) scale(1.2);
+}
+
+/* Formations : léger décalage au survol */
+.edu-item {
+  transition: transform 0.3s var(--ease-out);
+}
+
+.edu-degree {
+  transition: color 0.3s ease;
+}
+
+.edu-item:hover {
+  transform: translateX(4px);
+}
+
+.edu-item:hover .edu-degree {
+  color: var(--accent-orange);
+}
+
+/* Compétences : élévation + reflet sur les badges mis en avant */
+.skill-tag {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.skill-tag:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-orange);
+  box-shadow: 0 6px 14px -6px color-mix(in srgb, var(--accent-orange) 40%, transparent);
+}
+
+.skill-tag.featured::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  animation: shine 4.5s ease-in-out infinite;
+}
+
+.skill-tag.featured:nth-child(2)::after { animation-delay: 0.4s; }
+.skill-tag.featured:nth-child(3)::after { animation-delay: 0.8s; }
+
+@keyframes shine {
+  0%, 60% { left: -60%; }
+  100%    { left: 130%; }
+}
+
+/* Loisirs : élévation + icône animée */
+.hobby-clean-item {
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hobby-clean-item i,
+.hobby-clean-item svg {
+  transition: transform 0.4s var(--ease-out);
+}
+
+.hobby-clean-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold-soft);
+  box-shadow: 0 10px 22px -12px rgba(15, 23, 42, 0.25);
+}
+
+.hobby-clean-item:hover i,
+.hobby-clean-item:hover svg {
+  transform: scale(1.2) rotate(-10deg);
+}
+
+/* Boutons : élévation + reflet lumineux */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -8px rgba(15, 23, 42, 0.35);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary::after,
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+}
+
+.btn-primary:hover::after,
+.btn-gold:hover::after {
+  left: 130%;
+}
+
+/* Modales & notifications */
+.modal-overlay.active {
+  animation: fadeIn 0.25s ease both;
+}
+
+.modal-overlay.active .modal-box {
+  animation: modalIn 0.4s var(--ease-out) both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+.builder-tab-pane.active {
+  animation: fadeUp 0.35s var(--ease-out) both;
+}
+
+.toast {
+  animation: toastIn 0.4s var(--ease-out) both;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Apparition au défilement (classes posées par app.js) */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Accessibilité : réduire les animations si demandé par le système */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* ==========================================================================
    STYLES D'IMPRESSION A4 STRICTS & ATS FRIENDLY
    ========================================================================== */
 @media print {
@@ -1025,6 +1685,39 @@ body {
     color: #0F172A !important;
     padding: 0 !important;
     font-size: 10.5pt !important;
+  }
+
+  /* Neutralise toutes les animations : le PDF doit être complet et statique */
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .scroll-progress,
+  .cv-header-photo-wrap::before,
+  .skill-tag.featured::after {
+    display: none !important;
+  }
+
+  .cv-name {
+    background: none !important;
+    -webkit-text-fill-color: #0F172A !important;
+  }
+
+  .exp-item {
+    padding: 0.3rem 0 0.3rem 0.4rem !important;
+  }
+
+  .section-title-wrap::after,
+  .exp-list::before,
+  .section-title-wrap i,
+  .section-title-wrap svg {
+    transform: none !important;
   }
 
   .top-action-bar,
@@ -1045,7 +1738,7 @@ body {
   .cv-sheet {
     box-shadow: none !important;
     border: none !important;
-    border-top: 3px solid #D97706 !important;
+    border-top: 3px solid var(--accent-gold) !important;
     border-radius: 0 !important;
   }
 
@@ -1057,7 +1750,7 @@ body {
   .cv-header-photo-wrap {
     width: 80px !important;
     height: 80px !important;
-    border: 2px solid #D97706 !important;
+    border: 2px solid var(--accent-gold) !important;
     box-shadow: none !important;
   }
 
@@ -1080,7 +1773,7 @@ body {
 
   .section-title {
     font-size: 10pt !important;
-    border-bottom: 1px solid #D97706 !important;
+    border-bottom: 1px solid var(--accent-gold) !important;
   }
 
   .exp-item, .edu-item {
@@ -1103,7 +1796,7 @@ body {
   .social-icon-box {
     background: transparent !important;
     border: none !important;
-    color: #D97706 !important;
+    color: var(--accent-gold) !important;
     width: 18px !important;
     height: 18px !important;
   }

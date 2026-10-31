@@ -1,12 +1,13 @@
 /**
- * CV Professionnel — N'GUESSAN KOUADION PREVOSTE MAUREL
+ * CV Professionnel — N'GUESSAN KOUADIO PREVOSTE MAUREL
  * Logique épurée, sobre, lisible et performante
  */
 
 const AppState = {
   currentProfile: null,
   isCustomProfile: false,
-  savedCustomProfiles: []
+  savedCustomProfiles: [],
+  builderPhoto: null
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   initIcons();
+  initPageEffects();
   loadSavedProfiles();
   initEventListeners();
   initFormRepeaters();
@@ -95,6 +97,8 @@ function loadProfile(p, isCustom = false) {
     cvAvailability.textContent = p.availability;
   }
 
+  applyTheme(p.theme);
+
   // Rendu des sections
   renderExperience(p);
   renderEducation(p);
@@ -105,6 +109,115 @@ function loadProfile(p, isCustom = false) {
 
   document.title = `${p.fullName} | CV Professionnel — ${p.title}`;
   initIcons();
+  initRevealAnimations();
+}
+
+/**
+ * Thème de couleurs du CV : deux couleurs de base, toutes les nuances en découlent (voir style.css)
+ */
+const DEFAULT_THEME = { primary: '#D97706', secondary: '#EA580C' };
+
+const THEME_PRESETS = [
+  { name: 'Or & Orange', primary: '#D97706', secondary: '#EA580C' },
+  { name: 'Bleu Lnweb', primary: '#1D4ED8', secondary: '#EA580C' },
+  { name: 'Bleu Nuit', primary: '#1E3A8A', secondary: '#0284C7' },
+  { name: 'Émeraude', primary: '#047857', secondary: '#0D9488' },
+  { name: 'Bordeaux', primary: '#9F1239', secondary: '#E11D48' },
+  { name: 'Violet', primary: '#6D28D9', secondary: '#A21CAF' },
+  { name: 'Graphite', primary: '#334155', secondary: '#0F766E' },
+  { name: 'Rose Poudré', primary: '#DB2777', secondary: '#9333EA' }
+];
+
+function applyTheme(theme) {
+  const rootStyle = document.documentElement.style;
+  if (theme && theme.primary && theme.secondary) {
+    rootStyle.setProperty('--accent-gold', theme.primary);
+    rootStyle.setProperty('--accent-orange', theme.secondary);
+  } else {
+    rootStyle.removeProperty('--accent-gold');
+    rootStyle.removeProperty('--accent-orange');
+  }
+}
+
+/**
+ * Effets de page : barre de progression, ombre de la barre du haut, halo de l'en-tête
+ */
+function initPageEffects() {
+  const progress = document.getElementById('scrollProgress');
+  const topBar = document.querySelector('.top-action-bar');
+  let ticking = false;
+
+  const onScroll = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = max > 0 ? window.scrollY / max : 0;
+    if (progress) progress.style.transform = `scaleX(${ratio})`;
+    if (topBar) topBar.classList.toggle('is-scrolled', window.scrollY > 8);
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(onScroll);
+    }
+  }, { passive: true });
+  onScroll();
+
+  const header = document.querySelector('.cv-header');
+  if (header) {
+    header.addEventListener('mousemove', (e) => {
+      const rect = header.getBoundingClientRect();
+      header.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+      header.style.setProperty('--my', `${e.clientY - rect.top}px`);
+    });
+  }
+}
+
+/**
+ * Apparition progressive des blocs du CV au défilement
+ */
+let revealObserver = null;
+
+function initRevealAnimations() {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || !('IntersectionObserver' in window)) return;
+
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        revealObserver.unobserve(el);
+        el.classList.add('is-visible');
+
+        // Une fois l'animation terminée, on retire les classes pour libérer les effets de survol
+        const delay = parseInt(el.style.getPropertyValue('--reveal-delay'), 10) || 0;
+        setTimeout(() => {
+          el.classList.remove('reveal', 'is-visible');
+          el.style.removeProperty('--reveal-delay');
+        }, delay + 1600);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }
+
+  const groups = [
+    '.cv-section',
+    '#cvExpList .exp-item',
+    '#cvEduList .edu-item',
+    '#cvSkillsList .skill-tag',
+    '#cvHobbiesList .hobby-clean-item',
+    '#cvSocialsList .social-clean-link'
+  ];
+
+  groups.forEach(selector => {
+    document.querySelectorAll(selector).forEach((el, idx) => {
+      if (el.dataset.revealed) return;
+      el.dataset.revealed = '1';
+      el.classList.add('reveal');
+      el.style.setProperty('--reveal-delay', `${Math.min(idx, 10) * 70}ms`);
+      revealObserver.observe(el);
+    });
+  });
 }
 
 /**
@@ -113,6 +226,7 @@ function loadProfile(p, isCustom = false) {
 function updateCustomBanner(profile, isCustom) {
   const banner = document.getElementById('customCvBanner');
   const bannerText = document.getElementById('customCvBannerText');
+  document.body.classList.toggle('is-custom-cv', isCustom);
   if (!banner) return;
 
   if (isCustom) {
@@ -406,7 +520,7 @@ function initQuoteForm() {
 
     const emailSubject = `[DEMANDE DE DEVIS CV] ${projectType} — ${clientName}`;
     const emailBody = 
-`Bonjour N'GUESSAN KOUADION PREVOSTE MAUREL,
+`Bonjour N'GUESSAN KOUADIO PREVOSTE MAUREL,
 
 Je souhaite solliciter vos services. Voici les détails de ma demande :
 
@@ -498,6 +612,9 @@ function initFormRepeaters() {
     btnAddEdu.addEventListener('click', () => addEducationItem(eduListContainer));
   }
 
+  initPhotoUpload();
+  initThemePicker();
+
   const btnFillPreset = document.getElementById('btnFillPreset');
   if (btnFillPreset) {
     btnFillPreset.addEventListener('click', () => {
@@ -505,6 +622,142 @@ function initFormRepeaters() {
       showToast('Modèle pré-rempli !', 'info');
     });
   }
+}
+
+/**
+ * Choix des couleurs dans le créateur de CV (palettes + sélecteurs libres)
+ */
+function initThemePicker() {
+  const presetsContainer = document.getElementById('themePresets');
+  const inputPrimary = document.getElementById('bldColorPrimary');
+  const inputSecondary = document.getElementById('bldColorSecondary');
+  if (!presetsContainer || !inputPrimary || !inputSecondary) return;
+
+  presetsContainer.innerHTML = THEME_PRESETS.map((t, idx) => `
+    <button type="button" class="theme-preset-btn" data-index="${idx}">
+      <span class="theme-preset-swatch">
+        <span style="background:${t.primary}"></span>
+        <span style="background:${t.secondary}"></span>
+      </span>
+      ${escapeHtml(t.name)}
+    </button>
+  `).join('');
+
+  presetsContainer.addEventListener('click', (e) => {
+    const btn = e.target.closest('.theme-preset-btn');
+    if (!btn) return;
+    setBuilderTheme(THEME_PRESETS[Number(btn.dataset.index)]);
+  });
+
+  [inputPrimary, inputSecondary].forEach(input => {
+    input.addEventListener('input', () => {
+      setBuilderTheme({ primary: inputPrimary.value, secondary: inputSecondary.value });
+    });
+  });
+
+  setBuilderTheme(DEFAULT_THEME);
+}
+
+function setBuilderTheme(theme) {
+  const inputPrimary = document.getElementById('bldColorPrimary');
+  const inputSecondary = document.getElementById('bldColorSecondary');
+  const preview = document.getElementById('themePreview');
+  const primary = theme.primary.toUpperCase();
+  const secondary = theme.secondary.toUpperCase();
+
+  inputPrimary.value = primary.toLowerCase();
+  inputSecondary.value = secondary.toLowerCase();
+
+  if (preview) {
+    preview.style.setProperty('--p', primary);
+    preview.style.setProperty('--s', secondary);
+  }
+
+  document.querySelectorAll('.theme-preset-btn').forEach(btn => {
+    const t = THEME_PRESETS[Number(btn.dataset.index)];
+    btn.classList.toggle('active', t.primary === primary && t.secondary === secondary);
+  });
+}
+
+function getBuilderTheme() {
+  return {
+    primary: document.getElementById('bldColorPrimary').value.toUpperCase(),
+    secondary: document.getElementById('bldColorSecondary').value.toUpperCase()
+  };
+}
+
+/**
+ * Import de la photo de profil dans le créateur de CV
+ */
+function initPhotoUpload() {
+  const input = document.getElementById('bldPhoto');
+  const btnPick = document.getElementById('btnPickPhoto');
+  const btnRemove = document.getElementById('btnRemovePhoto');
+  if (!input || !btnPick || !btnRemove) return;
+
+  btnPick.addEventListener('click', () => input.click());
+
+  input.addEventListener('change', () => {
+    const file = input.files && input.files[0];
+    input.value = '';
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      showToast('Veuillez choisir un fichier image (JPG, PNG...).', 'warning');
+      return;
+    }
+
+    resizeImageFile(file, 400)
+      .then(dataUrl => {
+        setBuilderPhoto(dataUrl);
+        showToast('Photo importée !', 'success');
+      })
+      .catch(() => showToast('Impossible de lire cette image.', 'warning'));
+  });
+
+  btnRemove.addEventListener('click', () => setBuilderPhoto(null));
+}
+
+function setBuilderPhoto(dataUrl) {
+  AppState.builderPhoto = dataUrl;
+
+  const preview = document.getElementById('bldPhotoPreview');
+  const btnRemove = document.getElementById('btnRemovePhoto');
+
+  if (preview) {
+    preview.innerHTML = dataUrl
+      ? `<img src="${escapeHtml(dataUrl)}" alt="Aperçu de la photo">`
+      : `<i data-lucide="user"></i>`;
+  }
+  if (btnRemove) btnRemove.hidden = !dataUrl;
+  initIcons();
+}
+
+/**
+ * Redimensionne l'image (côté max en px) pour limiter la taille stockée en localStorage
+ */
+function resizeImageFile(file, maxSize) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = () => {
+        const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', 0.85));
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
 }
 
 function addExperienceItem(container, data = null) {
@@ -585,6 +838,8 @@ function fillBuilderWithProfile(p) {
   document.getElementById('bldLocation').value = p.location || '';
   document.getElementById('bldBio').value = p.bio || '';
   document.getElementById('bldSkills').value = (p.badges || []).join(', ');
+  if (p.photo) setBuilderPhoto(p.photo);
+  if (p.theme) setBuilderTheme(p.theme);
 
   const expContainer = document.getElementById('builderExpList');
   expContainer.innerHTML = '';
@@ -675,6 +930,8 @@ function initCvBuilderForm() {
     const newProfile = {
       fullName,
       title,
+      photo: AppState.builderPhoto,
+      theme: getBuilderTheme(),
       email,
       phone,
       location: location || "Côte d'Ivoire",
